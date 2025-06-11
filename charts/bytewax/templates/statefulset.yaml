@@ -261,6 +261,12 @@ spec:
           subPath: {{ .subPath }}
           readOnly: {{ .readOnly }}
 {{- end }}
+{{- range .Values.extraConfigmapMounts }}
+        - name: {{ .name }}
+          mountPath: {{ .mountPath }}
+          subPath: {{ .subPath }}
+          readOnly: {{ .readOnly }}
+{{- end }}
       volumes:
 {{- if .Values.configuration.dependencies }}
       - name: pip-tmp
@@ -311,6 +317,11 @@ spec:
         {{- else }}
         emptyDir: {}
         {{- end }}
+{{- end }}
+{{- range .Values.extraConfigmapMounts }}
+      - name: {{ .name }}
+        configMap:
+          name: {{ .name }}
 {{- end }}
 {{- if .Values.configuration.recovery.enabled }}
       - name: recovery

@@ -115,6 +115,14 @@ extraVolumeMounts: []
   #   readOnly: true
   #   hostPath: /usr/shared/
 
+# Defines additional mounts from ConfigMaps. ConfigMaps must be manually created in the namespace.
+# You can use also projected volumes
+extraConfigmapMounts: []
+  # - name: configmap-files
+  #   mountPath: /etc/configs
+  #   readOnly: true
+  #   subPath: ""
+
 configuration:
   pythonFileName: "simple.py"
   dependencies: []
